@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             {% set navigation_bar = [
                 ('/', 'index', 'Orders'),
-                ('#', 'pizza', 'New Pizza')
+                ('/pizza', 'pizza', 'New Pizza')
                 ]-%}
             {% set active_page = active_page|default('index') -%}
             <ul class="navbar-nav ml-auto">
