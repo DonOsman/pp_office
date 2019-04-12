@@ -1,0 +1,37 @@
+{% extends "default.html" %}
+{% set active_page = "index" %}
+{% block title %}Panucci's Pizza{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Orders</h1>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Order #</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Customer Address</th>
+                        <th scope="col">Pizza Type</th>
+                        <th scope="col">Pizza Count</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.name }}</td>
+                            <td>{{ order.address }}</td>
+                            <td>{{ pizzas[order.pizza_id - 1].id }} -- {{ pizzas[order.pizza_id - 1].name }}</td>
+                            <td>{{ order.pizza_count }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}s

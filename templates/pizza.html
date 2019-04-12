@@ -1,0 +1,62 @@
+{% extends "default.html" %}
+{% set active_page = "pizza" %}
+{% block title %}Pizza{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Short Desc.</th>
+                    <th scope="col">Long Desc.</th>
+                    <th scope="col">img url</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for pizza in pizzas %}
+                    <tr>
+                        <td>{{ pizza.id }}</td>
+                        <td>{{ pizza.name }}</td>
+                        <td>{{ "${:,.2f}".format(pizza.price / 100) }} }}</td>
+                        <td>{{ pizza.short_desc }}</td>
+                        <td>{{ pizza.long_desc }}</td>
+                        <td><a href="{{ pizza.img }}">{{ pizza.img }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <form method="POST" action="/pizza">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                <label for="pizza_name">Pizza Name</label>
+                <input type="text" class="form-control" id="pizza_name" name="pizza_name" placeholder="Pizza Name">
+            </div>
+            <div class="form-group">
+                <label for="price">Price in Cents (ex: $12.99 -> 1299)</label>
+                <input type="number" min="500" class="form-control" id="price" name="price" placeholder="500"">
+            </div>
+            <div class="form-group">
+                <label for="short_desc">Short Description</label>
+                <input type="text" class="form-control" id="short_desc" name="short_desc" placeholder="Short 80 char description">
+            </div>
+            <div class="form-group">
+                <label for="long_desc">Long Description</label>
+                <input type="text" class="form-control" id="long_desc" name="long_desc" placeholder="Long 280 char description">
+            </div>
+            <div class="form-group">
+                <label for="img_url">Image URL</label>
+                <input type="text" class="form-control" id="img_url" name="img_url" placeholder="Full URL for pizza image froms static.bigppizza.net">
+            </div>
+            <button type="submit" class="btn btn-primary">Create New Pizza Type</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
